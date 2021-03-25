@@ -76,7 +76,7 @@ public class InsertMorton extends HttpServlet {
 
             "</ul>\n");
 
-      out.println("<a href=/webproject-lol-lookup-morton/search-morton.html>Search Data</a> <br>");
+      out.println("<a href=/webproject-lol-lookup-morton/search-build-morton.html>Search Build Data</a> <br>");
       out.println("</body></html>");
    }
 

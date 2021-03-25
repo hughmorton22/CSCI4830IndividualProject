@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ByChampionNameSearch")
-public class ByChampionNameMorton extends HttpServlet {
+@WebServlet("/SearchChampionStats")
+public class SearchChampionStatsMorton extends HttpServlet {
    private static final long serialVersionUID = 1L;
 
-   public ByChampionNameMorton() {
+   public SearchChampionStatsMorton() {
       super();
    }
 
@@ -45,16 +45,16 @@ public class ByChampionNameMorton extends HttpServlet {
 
          if (keyword.isEmpty()) {
         	 
-            String selectSQL = "SELECT * FROM LolBuildsTableMorton";
+            String selectSQL = "SELECT * FROM LolChampionsTableMorton";
             
             preparedStatement = connection.prepareStatement(selectSQL);
          } else {
         	 
         	 
-            String selectSQL = "SELECT * FROM LolBuildsTableMorton WHERE champion LIKE ?";
-            String theChampion = "%" + keyword + "%";
+            String selectSQL = "SELECT * FROM LolChampionsTableMorton WHERE name LIKE ?";
+            String theName = "%" + keyword + "%";
             preparedStatement = connection.prepareStatement(selectSQL);
-            preparedStatement.setString(1, theChampion);
+            preparedStatement.setString(1, theName);
          }
          
          
@@ -65,26 +65,28 @@ public class ByChampionNameMorton extends HttpServlet {
         	 
             int id = rs.getInt("id");
             String name = rs.getString("name").trim();
-            String champion = rs.getString("champion").trim();
-            String mythic = rs.getString("mythic_item").trim();
-            String legendary1 = rs.getString("legendary_item1").trim();
-            String legendary2 = rs.getString("legendary_item2").trim();
-            String legendary3 = rs.getString("legendary_item3").trim();
-            String legendary4 = rs.getString("legendary_item4").trim();
-            String boots = rs.getString("boots").trim();
+            String hp = rs.getString("hp").trim();
+            String mp = rs.getString("mp").trim();
+            String ad = rs.getString("ad").trim();
+            String as = rs.getString("as").trim();
+            String ar = rs.getString("ar").trim();
+            String mr = rs.getString("mr").trim();
+            String ms = rs.getString("ms").trim();
+            String rng = rs.getString("rng").trim();
 
-            if (keyword.isEmpty() || champion.contains(keyword)) {
-               out.println("<b>Build Name</b>: " + name + "<br>");
-               out.println("<b>Champion</b>: " + champion + "<br>");
-               out.println("<b>Mythic Item</b>: " + mythic + "<br>");
-               out.println("<b>Legendary Item 1</b>: " + legendary1 + "<br>");
-               out.println("<b>Legendary Item 2</b>: " + legendary2 + "<br>");
-               out.println("<b>Legendary Item 3</b>: " + legendary3 + "<br>");
-               out.println("<b>Legendary Item 4</b>: " + legendary4 + "<br>");
-               out.println("<b>Boots</b>: " + boots + "<br><br>");
+            if (keyword.isEmpty() || name.contains(keyword)) {
+               out.println("<b>Champion Name</b>: " + name + "<br>");
+               out.println("<b>Base Health Points</b>: " + hp + "<br>");
+               out.println("<b>Base Mana Points</b>: " + mp + "<br>");
+               out.println("<b>Base Attack Damage</b>: " + ad + "<br>");
+               out.println("<b>Base Attack Speed</b>: " + as + "<br>");
+               out.println("<b>Base Armor</b>: " + ar + "<br>");
+               out.println("<b>Base Magic Resistance</b>: " + mr + "<br>");
+               out.println("<b>Base Movement Speed</b>: " + ms + "<br><br>");
+               out.println("<b>Base Attack Range</b>: " + rng + "<br><br>");
             }
          }
-         out.println("<a href=/webproject-lol-lookup-morton/search-build-morton.html>Search Build Data</a> <br>");
+         out.println("<a href=/webproject-lol-lookup-morton/search-build-morton.html>Search Champion Stats</a> <br>");
          out.println("</body></html>");
          rs.close();
          preparedStatement.close();
