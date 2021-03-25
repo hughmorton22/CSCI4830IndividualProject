@@ -68,7 +68,7 @@ public class SearchChampionStatsMorton extends HttpServlet {
             String hp = rs.getString("hp").trim();
             String mp = rs.getString("mp").trim();
             String ad = rs.getString("ad").trim();
-            String as = rs.getString("as").trim();
+            String as = rs.getString("atks").trim();
             String ar = rs.getString("ar").trim();
             String mr = rs.getString("mr").trim();
             String ms = rs.getString("ms").trim();
@@ -82,11 +82,11 @@ public class SearchChampionStatsMorton extends HttpServlet {
                out.println("<b>Base Attack Speed</b>: " + as + "<br>");
                out.println("<b>Base Armor</b>: " + ar + "<br>");
                out.println("<b>Base Magic Resistance</b>: " + mr + "<br>");
-               out.println("<b>Base Movement Speed</b>: " + ms + "<br><br>");
+               out.println("<b>Base Movement Speed</b>: " + ms + "<br>");
                out.println("<b>Base Attack Range</b>: " + rng + "<br><br>");
             }
          }
-         out.println("<a href=/webproject-lol-lookup-morton/search-build-morton.html>Search Champion Stats</a> <br>");
+         out.println("<a href=/webproject-lol-lookup-morton/search-champion-morton.html>Search Champion Stats</a> <br>");
          out.println("</body></html>");
          rs.close();
          preparedStatement.close();
